@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Media Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-film"></i>
+            <span>Media Converter</span>
+        </div>
+        <div class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/help" class="active"><i class="fas fa-question-circle"></i> Help</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Help Center</h1>
+            <p>Find answers to your questions and learn how to use our service</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="help-content">
+            <section class="help-section">
+                <h2><i class="fas fa-book"></i> Getting Started</h2>
+                <div class="help-item">
+                    <h3>How to Convert Files</h3>
+                    <ol>
+                        <li>Select the type of conversion you want to perform</li>
+                        <li>Upload your file by dragging and dropping or clicking the upload button</li>
+                        <li>Click the Convert button</li>
+                        <li>Download your converted file when ready</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="help-section">
+                <h2><i class="fas fa-file-alt"></i> Supported Formats</h2>
+                <div class="help-item">
+                    <h3>Video Formats</h3>
+                    <ul>
+                        <li>MP4 (.mp4)</li>
+                        <li>AVI (.avi)</li>
+                        <li>MOV (.mov)</li>
+                    </ul>
+                </div>
+                <div class="help-item">
+                    <h3>Audio Formats</h3>
+                    <ul>
+                        <li>WAV (.wav)</li>
+                        <li>MP3 (.mp3)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="help-section">
+                <h2><i class="fas fa-exclamation-circle"></i> Common Issues</h2>
+                <div class="help-item">
+                    <h3>File Size Limits</h3>
+                    <p>The maximum file size for conversion is 16MB. For larger files, please contact our support team.</p>
+                </div>
+                <div class="help-item">
+                    <h3>Conversion Quality</h3>
+                    <p>We maintain the highest possible quality during conversion. However, some quality loss may occur depending on the original file format and size.</p>
+                </div>
+            </section>
+
+            <section class="help-section">
+                <h2><i class="fas fa-shield-alt"></i> Privacy & Security</h2>
+                <div class="help-item">
+                    <h3>File Handling</h3>
+                    <p>Your files are processed securely and automatically deleted after conversion. We do not store any of your media files on our servers.</p>
+                </div>
+            </section>
+
+            <section class="help-section">
+                <h2><i class="fas fa-envelope"></i> Contact Support</h2>
+                <div class="help-item">
+                    <p>If you need additional help, please contact our support team:</p>
+                    <ul>
+                        <li>Email: support@mediaconverter.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                        <li>Response time: Within 24 hours</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide advanced media conversion services using cutting-edge AI technology.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="/help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@mediaconverter.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Media Converter. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

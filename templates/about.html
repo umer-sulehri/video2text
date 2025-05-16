@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Media Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-film"></i>
+            <span>Media Converter</span>
+        </div>
+        <div class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about" class="active"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/help"><i class="fas fa-question-circle"></i> Help</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>About Us</h1>
+            <p>Learn more about our mission and technology</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="about-content">
+            <section class="about-section">
+                <h2><i class="fas fa-rocket"></i> Our Mission</h2>
+                <p>At Media Converter, we're dedicated to revolutionizing the way people handle their media files. Our mission is to provide a seamless, efficient, and user-friendly platform for converting various media formats using cutting-edge AI technology.</p>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-cogs"></i> Our Technology</h2>
+                <p>Powered by Google's Gemini AI, our platform offers state-of-the-art conversion capabilities. We utilize advanced machine learning algorithms to ensure the highest quality conversions while maintaining the integrity of your original files.</p>
+                <div class="tech-features">
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Processing</h3>
+                        <p>Quick and efficient conversion of your media files</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure</h3>
+                        <p>Your files are processed securely and deleted after conversion</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-magic"></i>
+                        <h3>High Quality</h3>
+                        <p>Maintain the highest quality in your converted files</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-history"></i> Our Story</h2>
+                <p>Founded in 2024, Media Converter emerged from a simple idea: to make media conversion accessible to everyone. What started as a small project has grown into a comprehensive solution trusted by users worldwide.</p>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-users"></i> Our Team</h2>
+                <p>Our team consists of passionate developers, AI specialists, and user experience experts working together to create the best media conversion platform possible. We're constantly innovating and improving our services based on user feedback.</p>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide advanced media conversion services using cutting-edge AI technology.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="/help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@mediaconverter.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Media Converter. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

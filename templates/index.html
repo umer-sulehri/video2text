@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-film"></i>
+            <span>Media Converter</span>
+        </div>
+        <div class="nav-links">
+            <a href="/" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/help"><i class="fas fa-question-circle"></i> Help</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Convert Your Media Files</h1>
+            <p>Transform your videos and audio files with ease using advanced AI technology</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Conversion Options</h3>
+            </div>
+            <ul class="conversion-options">
+                <li class="active" data-type="video_to_audio">
+                    <i class="fas fa-video"></i>
+                    <span>Video to Audio</span>
+                    <p class="option-description">Extract audio from video files</p>
+                </li>
+                <li data-type="audio_to_text">
+                    <i class="fas fa-microphone"></i>
+                    <span>Audio to Text</span>
+                    <p class="option-description">Convert audio to text transcription</p>
+                </li>
+                <li data-type="video_to_text">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Video to Text</span>
+                    <p class="option-description">Extract text from video content</p>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="converter-box">
+                <div class="upload-area" id="dropZone">
+                    <input type="file" id="fileInput" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p>Drag and drop your file here or</p>
+                        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-folder-open"></i> Choose File
+                        </button>
+                        <p class="file-types" id="supportedFormats"></p>
+                    </div>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <p><i class="fas fa-file"></i> Selected file: <span id="fileName"></span></p>
+                    <button class="remove-btn" onclick="removeFile()">
+                        <i class="fas fa-times"></i> Remove
+                    </button>
+                </div>
+
+                <button class="convert-btn" id="convertBtn" disabled>
+                    <i class="fas fa-magic"></i> Convert
+                </button>
+
+                <div class="result-area" id="resultArea" style="display: none;">
+                    <h3><i class="fas fa-check-circle"></i> Result</h3>
+                    <div id="resultContent"></div>
+                    
+                    <div id="audioPlayer" style="display: none;" class="audio-player">
+                        <h4>Preview Audio</h4>
+                        <audio controls id="audioPreview">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                    <div id="textControls" style="display: none;" class="text-controls">
+                        <button class="action-btn" id="copyBtn">
+                            <i class="fas fa-copy"></i> Copy Text
+                        </button>
+                        <button class="action-btn" id="summarizeBtn">
+                            <i class="fas fa-compress-alt"></i> Summarize
+                        </button>
+                    </div>
+
+                    <div id="summaryArea" style="display: none;" class="summary-area">
+                        <h4>Summary</h4>
+                        <div id="summaryContent"></div>
+                    </div>
+
+                    <button class="download-btn" id="downloadBtn" style="display: none;">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+
+                <div class="loading" id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Converting...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Key Features Section -->
+    <section class="features-section">
+        <div class="section-container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Video to Audio</h3>
+                    <p>Extract high-quality audio from your videos with our advanced conversion technology.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Audio to Text</h3>
+                    <p>Convert audio recordings to accurate text transcriptions using OpenAI's powerful Whisper model.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Video to Text</h3>
+                    <p>Directly transcribe video content to text with our seamless conversion pipeline.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-compress-alt"></i>
+                    <h3>Text Summarization</h3>
+                    <p>Get concise summaries of your transcribed content using advanced AI technology.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Easy Download</h3>
+                    <p>Download your converted files instantly in various formats for your convenience.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Processing</h3>
+                    <p>Your files are processed securely and deleted immediately after conversion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="section-container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Us</h2>
+                    <p class="about-description">
+                        We are a team of passionate developers and AI enthusiasts dedicated to making media conversion 
+                        and transcription accessible to everyone. Our platform leverages cutting-edge AI technology 
+                        to provide accurate, fast, and reliable conversion services.
+                    </p>
+                    <p class="about-description">
+                        Founded with the vision of simplifying media processing, we've developed an intuitive platform 
+                        that combines powerful features with ease of use. Our commitment to quality and innovation 
+                        drives us to continuously improve our services.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us-section">
+        <div class="section-container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="why-us-grid">
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Experience rapid conversions with our optimized processing pipeline.</p>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Utilize state-of-the-art AI models for accurate and reliable conversions.</p>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>User-Friendly</h3>
+                    <p>Enjoy our intuitive interface designed for users of all skill levels.</p>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Your files are processed securely and deleted after conversion.</p>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>High Quality</h3>
+                    <p>Get superior quality outputs with our advanced conversion algorithms.</p>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Access our dedicated support team whenever you need assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide advanced media conversion services using cutting-edge AI technology.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="/help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@mediaconverter.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Media Converter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const convertBtn = document.getElementById('convertBtn');
+        const resultArea = document.getElementById('resultArea');
+        const resultContent = document.getElementById('resultContent');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const loading = document.getElementById('loading');
+        const conversionOptions = document.querySelectorAll('.conversion-options li');
+        const supportedFormats = document.getElementById('supportedFormats');
+        let selectedFile = null;
+        let currentConversionType = 'video_to_audio';
+
+        // File format configurations
+        const formatConfig = {
+            video_to_audio: {
+                formats: ['mp4', 'avi', 'mov', 'mkv'],
+                accept: '.mp4,.avi,.mov,.mkv'
+            },
+            audio_to_text: {
+                formats: ['wav', 'mp3', 'ogg', 'm4a'],
+                accept: '.wav,.mp3,.ogg,.m4a'
+            },
+            video_to_text: {
+                formats: ['mp4', 'avi', 'mov', 'mkv'],
+                accept: '.mp4,.avi,.mov,.mkv'
+            }
+        };
+
+        function updateSupportedFormats(conversionType) {
+            const config = formatConfig[conversionType];
+            const formats = config.formats.map(f => f.toUpperCase()).join(', ');
+            supportedFormats.textContent = `Supported formats: ${formats}`;
+            fileInput.setAttribute('accept', config.accept);
+        }
+
+        // Initialize supported formats
+        updateSupportedFormats(currentConversionType);
+
+        // Conversion type selection
+        conversionOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                conversionOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                currentConversionType = option.dataset.type;
+                updateSupportedFormats(currentConversionType);
+                removeFile(); // Reset file selection when changing conversion type
+            });
+        });
+
+        // Drag and drop handlers
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                if (formatConfig[currentConversionType].formats.includes(fileExtension)) {
+                    handleFile(file);
+                } else {
+                    alert('Invalid file format. Please upload a supported file type.');
+                }
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                if (formatConfig[currentConversionType].formats.includes(fileExtension)) {
+                    handleFile(file);
+                } else {
+                    alert('Invalid file format. Please upload a supported file type.');
+                    fileInput.value = '';
+                }
+            }
+        });
+
+        function handleFile(file) {
+            selectedFile = file;
+            fileName.textContent = file.name;
+            fileInfo.style.display = 'flex';
+            convertBtn.disabled = false;
+        }
+
+        function removeFile() {
+            selectedFile = null;
+            fileInput.value = '';
+            fileInfo.style.display = 'none';
+            convertBtn.disabled = true;
+            resultArea.style.display = 'none';
+        }
+
+        convertBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('conversion_type', currentConversionType);
+
+            loading.style.display = 'flex';
+            resultArea.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            document.getElementById('audioPlayer').style.display = 'none';
+            document.getElementById('textControls').style.display = 'none';
+            document.getElementById('summaryArea').style.display = 'none';
+
+            try {
+                const response = await fetch('/convert', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    if (currentConversionType === 'video_to_audio') {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        
+                        // Set up audio preview
+                        const audioPreview = document.getElementById('audioPreview');
+                        audioPreview.src = url;
+                        document.getElementById('audioPlayer').style.display = 'block';
+                        
+                        downloadBtn.onclick = () => {
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'converted_audio.wav';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        };
+                        downloadBtn.style.display = 'block';
+                        resultContent.innerHTML = '<p>Audio conversion complete! You can preview or download the file.</p>';
+                    } else {
+                        const data = await response.json();
+                        if (data.error) {
+                            resultContent.innerHTML = `<p class="error">${data.error}</p>`;
+                        } else {
+                            resultContent.innerHTML = `<textarea readonly class="result-text">${data.text}</textarea>`;
+                            document.getElementById('textControls').style.display = 'flex';
+                            
+                            // Copy button functionality
+                            document.getElementById('copyBtn').onclick = () => {
+                                const textarea = document.querySelector('.result-text');
+                                textarea.select();
+                                document.execCommand('copy');
+                                alert('Text copied to clipboard!');
+                            };
+
+                            // Summarize button functionality
+                            document.getElementById('summarizeBtn').onclick = async () => {
+                                try {
+                                    const summaryResponse = await fetch('/summarize', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ text: data.text })
+                                    });
+                                    
+                                    if (summaryResponse.ok) {
+                                        const summaryData = await summaryResponse.json();
+                                        document.getElementById('summaryArea').style.display = 'block';
+                                        document.getElementById('summaryContent').innerHTML = 
+                                            `<textarea readonly class="summary-text">${summaryData.summary}</textarea>`;
+                                    } else {
+                                        throw new Error('Failed to generate summary');
+                                    }
+                                } catch (error) {
+                                    alert('Error generating summary: ' + error.message);
+                                }
+                            };
+
+                            downloadBtn.onclick = () => {
+                                const a = document.createElement('a');
+                                a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data.text);
+                                a.download = 'transcribed_text.txt';
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                            };
+                            downloadBtn.style.display = 'block';
+                        }
+                    }
+                } else {
+                    const error = await response.json();
+                    resultContent.innerHTML = `<p class="error">${error.error || 'An error occurred'}</p>`;
+                }
+            } catch (error) {
+                resultContent.innerHTML = `<p class="error">An error occurred: ${error.message}</p>`;
+            } finally {
+                loading.style.display = 'none';
+                resultArea.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 
